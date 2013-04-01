@@ -42,7 +42,7 @@ unpack_all() {
 
 		if (( ${#wavpacks[@]} > 0 )) ; then
 			unpack "$album"
-		elif [ "$(find "$album" -iname '*.wv' -printf '1' -quit)" = '1' ] > /dev/null ; then
+		elif [ "$(find "$album" -iname '*.wv' -printf '1' -quit)" = '1' ] ; then
 			die "Found Wavpacks in subdirectories or with uppercase file extension, please move them to the parent directory and fix their file extension: $album"
 		else
 			stdout "No Wavpacks in: $album"
