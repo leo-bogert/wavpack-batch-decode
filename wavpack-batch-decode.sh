@@ -9,16 +9,6 @@ shopt -u failglob	# some directories which we receive might not contain wavpacks
 INPUT_DIR_ABSOLUTE=''
 OUTPUT_DIR_ABSOLUTE=''
 
-set_working_directory_or_die() {
-	if [ "$#" -ne 1 ] ; then
-		die 'Invalid parameter count'
-	fi
-	
-	if ! cd "$1" ; then
-		die 'Setting working directory failed!'
-	fi
-}
-
 unpack() {
 	album="$(basename "$1")"
 	stdout "Unpacking: $album"
