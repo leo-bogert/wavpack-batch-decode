@@ -25,7 +25,11 @@ unpack() {
 			die "cue, log or wav exists already for: $wavpack"
 		fi
 
-		wvunpack -cc -d -m --no-utf8-convert -q -xx 'LOG=%a.log' "$wavpack"
+		local log_utf8="$disc.log.utf8"
+		wvunpack -cc -d -m --no-utf8-convert -q -xx "LOG=$log_utf8" "$wavpack"
+		# perfect-flac-encode expects UTF-16 on the LOG because it is the standard format which EAC will spit out, so we convert to that.
+		iconv --from-code utf-8 --to-code utf-16 --output "$disc.log" "$log_utf8"
+		rm -- "$log_utf8"
 	done
 }
 
