@@ -52,18 +52,7 @@ unpack_all() {
 }
 
 main() {
-	if [ "$#" -ne 2 ] ; then
-		die "Syntax: $0 INPUT_DIR OUTPUT_DIR"
-	fi
-
-	local input_dir="$(remove_trailing_slash_on_path "$1")"
-	local output_dir="$(remove_trailing_slash_on_path "$2")"
-	
-	INPUT_DIR_ABSOLUTE="$(make_path_absolute_to_original_working_dir "$input_dir")"
-	OUTPUT_DIR_ABSOLUTE="$(make_path_absolute_to_original_working_dir "$output_dir")"
-
-    stdout "Input directory: $INPUT_DIR_ABSOLUTE"
-    stdout "Output directory: $OUTPUT_DIR_ABSOLUTE"
+	obtain_two_parameters_as_inputdir_output_dir "$@"
 
 	if [ -e "$OUTPUT_DIR_ABSOLUTE" ] ; then
 		die "Output dir exists already!"
